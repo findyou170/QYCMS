@@ -1,0 +1,24 @@
+<IfModule mod_rewrite.c>
+# 这个文件可以用地址直接访问public/index.php
+RewriteEngine on
+# 把 www.test.com 改为你要绑定的域名.
+
+RewriteCond %{HTTP_HOST} ^www.qycms.net/$
+
+# 把 project 改为要绑定的目录.
+RewriteCond %{REQUEST_URI} !^/public/
+
+# 不要改以下两行.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# 把 project 改为要绑定的目录.
+RewriteRule ^(.*)$ /public/$1
+
+# 把 www.test.com 改为你要绑定的域名
+# 把 dev 改为要绑定的目录.
+# project / 后面是首页文件 如：index.html
+RewriteCond %{HTTP_HOST} ^www.qycms.net$
+RewriteRule ^(/)?$ public/index.php [L]
+
+</IfModule>
